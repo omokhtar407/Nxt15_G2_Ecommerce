@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h1>Login Form</h1>
+    <form [formGroup]="logForm" (ngSubmit)="Login()">
+
+      <div class="form-group my-2">
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Email...."
+          class="form-control my-2"
+        />
+        @if (
+          this.logForm.get("email")?.errors &&
+          this.logForm.get("email")?.touched
+        ) {
+          <div class="alert alert-danger">
+            @if (this.logForm.get('email')?.errors?.['required']) {
+              <p>Email is Required</p>
+            }
+            @if (this.logForm.get('email')?.errors?.['email']) {
+              <p>Email is Invalid</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="form-group my-2">
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="Password...."
+          class="form-control my-2"
+        />
+        @if (
+          this.logForm.get("password")?.errors &&
+          this.logForm.get("password")?.touched
+        ) {
+          <div class="alert alert-danger">
+              @if (this.logForm.get('password')?.errors?.['required']) {
+                <p>Password is Required</p>
+              }
+              @if (this.logForm.get('password')?.errors?.['pattern']) {
+                <p>Password must be 6-16 chars and contain at least one number and one special char</p>
+              }
+          </div>
+        }
+      </div>
+
+
+      <button [disabled]="!this.logForm.valid" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h1>Register Form</h1>
+    <form [formGroup]="regForm" (ngSubmit)="Register()">
+      <div class="form-group my-2">
+        <input
+          formControlName="name"
+          type="text"
+          placeholder="Name...."
+          class="form-control my-2"
+        />
+        @if (
+          this.regForm.get("name")?.errors && this.regForm.get("name")?.touched
+        ) {
+          <div class="alert alert-danger">
+            @if (this.regForm.get("name")?.errors?.["required"]) {
+              <p>Name is required</p>
+            }
+            @if (this.regForm.get("name")?.errors?.["minlength"]) {
+              <p>Name minlength is 8 chars</p>
+            }
+            @if (this.regForm.get("name")?.errors?.["maxlength"]) {
+              <p>Name maxlength is 20 chars</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="form-group my-2">
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Email...."
+          class="form-control my-2"
+        />
+        @if (
+          this.regForm.get("email")?.errors &&
+          this.regForm.get("email")?.touched
+        ) {
+          <div class="alert alert-danger">
+            @if (this.regForm.get('email')?.errors?.['required']) {
+              <p>Email is Required</p>
+            }
+            @if (this.regForm.get('email')?.errors?.['email']) {
+              <p>Email is Invalid</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="form-group my-2">
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="Password...."
+          class="form-control my-2"
+        />
+        @if (
+          this.regForm.get("password")?.errors &&
+          this.regForm.get("password")?.touched
+        ) {
+          <div class="alert alert-danger">
+              @if (this.regForm.get('password')?.errors?.['required']) {
+                <p>Password is Required</p>
+              }
+              @if (this.regForm.get('password')?.errors?.['pattern']) {
+                <p>Password must be 6-16 chars and contain at least one number and one special char</p>
+              }
+          </div>
+        }
+      </div>
+      <div class="form-group my-2">
+        <input
+          formControlName="rePassword"
+          type="password"
+          placeholder="rePassword...."
+          class="form-control my-2"
+        />
+        @if (
+          this.regForm.getError('misMatch')&&
+          this.regForm.get("rePassword")?.touched
+        ) {
+          <div class="alert alert-danger">
+            <p>RePassword is not Match</p>
+          </div>
+        }
+      </div>
+      <div class="form-group my-2">
+        <input
+          formControlName="phone"
+          type="text"
+          placeholder="Phone...."
+          class="form-control my-2"
+        />
+        @if (
+          this.regForm.get("phone")?.errors &&
+          this.regForm.get("phone")?.touched
+        ) {
+          <div class="alert alert-danger">
+              @if (this.regForm.get('phone')?.errors?.['required']) {
+                <p>Phone is Required</p>
+              }
+              @if (this.regForm.get('phone')?.errors?.['pattern']) {
+                <p>Phone must be a valid Egyptian number</p>
+              }
+          </div>
+        }
+      </div>
+      <input type="date">
+      <button  class="btn btn-primary">Register</button>
+      <!-- <button [disabled]="!this.regForm.valid" class="btn btn-primary">Register</button> -->
+    </form>
+  </div>
+</div>
